@@ -1,0 +1,63 @@
+#!/bin/bash
+
+bar=(
+  position=top
+  height=32
+  margin=10
+  corner_radius=6
+  color=0x001e2030
+)
+
+sketchybar --bar "${bar[@]}"
+
+default=(
+  padding_left=0
+  padding_right=0
+  icon.font="FiraCode Nerd Font Mono:Regular:12.0"
+  label.font="FiraCode Nerd Font Mono:Regular:12.0"
+  icon.color=0xffffffff
+  label.color=0xffffffff
+  icon.padding_left=3
+  icon.padding_right=3
+  label.padding_left=0
+  label.padding_right=0
+)
+sketchybar --default "${default[@]}"
+
+space_bracket=(
+  background.border_color=0xffffffff
+  background.border_width=0
+  background.height=20
+  background.corner_radius=5
+  background.drawing=on
+)
+
+space_colors=(0xfff0c6c6 0xffc6a0f6 0xfff5a97f 0xff8bd5ca 0xff8aadf4)
+
+sketchybar --add event aerospace_workspace_change
+
+for monitor in $(aerospace list-monitors | awk '{print $1}'); do
+  sketchybar --add item space.start left --set space.start background.drawing=off width=6
+  space_index=0
+  for sid in $(aerospace list-workspaces --monitor $monitor); do
+    space_color=${space_colors[space_index%${#space_colors[@]}]}
+    sketchybar --add item space.$sid left \
+      --subscribe space.$sid space_windows_change aerospace_workspace_change display_change system_woke \
+      --set space.$sid \
+      display=$monitor \
+      click_script="aerospace workspace $sid" \
+      script="$CONFIG_DIR/scripts/update_space.sh $sid $space_color"
+
+    ((space_index++))
+  done
+  sketchybar --add item space.end left --set space.end background.drawing=off width=6
+  sketchybar --add bracket spaces_bracket space.start space.end \
+    --set spaces_bracket background.height=26 background.color=0xff1e2030 background.corner_radius=6
+done
+
+sketchybar --add item clock right \
+           --set clock \
+             script="$CONFIG_DIR/scripts/update_clock.sh"
+
+sketchybar --update
+

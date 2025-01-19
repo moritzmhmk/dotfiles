@@ -1,0 +1,53 @@
+:: default : borders active_color=0x00ffffff
+:: focus @ : borders width=6.0 active_color=0xff04a5e5 # 04a5e5 = Catpuccin Sky
+:: move @ : borders width=6.0 active_color=0xff8839ef # 8839ef = Catpuccin Mauve
+:: join @ : borders width=6.0 active_color=0xfffe640b # fe640b = Catpuccin Peach
+
+# switch to "command" mode with `lcmd + esc` and exit it with `esc`
+default < lcmd - escape ; focus
+
+focus < escape ; default
+focus < 0x29 ; move # 0x29 = Ö
+
+move < escape ; default
+move < 0x29 ; join # 0x29 = Ö
+
+join < escape ; default
+join < 0x29 ; focus # 0x29 = Ö
+
+focus < h : aerospace focus left
+focus < j : aerospace focus down
+focus < k : aerospace focus up
+focus < l : aerospace focus right
+focus < 1 : aerospace workspace --fail-if-noop 1 || osascript -e 'beep'
+focus < 2 : aerospace workspace --fail-if-noop 2 || osascript -e 'beep'
+focus < 3 : aerospace workspace --fail-if-noop 3 || osascript -e 'beep'
+focus < 4 : aerospace workspace --fail-if-noop 4 || osascript -e 'beep'
+focus < 5 : aerospace workspace --fail-if-noop 5 || osascript -e 'beep'
+focus < 6 : aerospace workspace --fail-if-noop 6 || osascript -e 'beep'
+focus < 7 : aerospace workspace --fail-if-noop 7 || osascript -e 'beep'
+focus < 8 : aerospace workspace --fail-if-noop 8 || osascript -e 'beep'
+focus < 9 : aerospace workspace --fail-if-noop 9 || osascript -e 'beep'
+focus < 0 : aerospace workspace --fail-if-noop 0 || osascript -e 'beep'
+
+move < h : aerospace move left
+move < j : aerospace move down
+move < k : aerospace move up
+move < l : aerospace move right
+move < 1 : aerospace move-node-to-workspace --fail-if-noop 1 || osascript -e 'beep'
+move < 2 : aerospace move-node-to-workspace --fail-if-noop 2 || osascript -e 'beep'
+move < 3 : aerospace move-node-to-workspace --fail-if-noop 3 || osascript -e 'beep'
+move < 4 : aerospace move-node-to-workspace --fail-if-noop 4 || osascript -e 'beep'
+move < 5 : aerospace move-node-to-workspace --fail-if-noop 5 || osascript -e 'beep'
+move < 6 : aerospace move-node-to-workspace --fail-if-noop 6 || osascript -e 'beep'
+move < 7 : aerospace move-node-to-workspace --fail-if-noop 7 || osascript -e 'beep'
+move < 8 : aerospace move-node-to-workspace --fail-if-noop 8 || osascript -e 'beep'
+move < 9 : aerospace move-node-to-workspace --fail-if-noop 9 || osascript -e 'beep'
+move < 0 : aerospace move-node-to-workspace --fail-if-noop 0 || osascript -e 'beep'
+
+
+join < h : aerospace join-with left
+join < j : aerospace join-with down
+join < k : aerospace join-with up
+join < l : aerospace join-with right
+
