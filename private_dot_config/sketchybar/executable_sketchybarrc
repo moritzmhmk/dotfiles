@@ -37,7 +37,7 @@ space_colors=(0xfff0c6c6 0xffc6a0f6 0xfff5a97f 0xff8bd5ca 0xff8aadf4)
 sketchybar --add event aerospace_workspace_change
 
 for monitor in $(aerospace list-monitors | awk '{print $1}'); do
-  sketchybar --add item space.start left --set space.start background.drawing=off width=6
+  sketchybar --add item space.start left --set space.start background.drawing=off width=0
   space_index=0
   for sid in $(aerospace list-workspaces --monitor $monitor); do
     space_color=${space_colors[space_index%${#space_colors[@]}]}
@@ -50,7 +50,7 @@ for monitor in $(aerospace list-monitors | awk '{print $1}'); do
 
     ((space_index++))
   done
-  sketchybar --add item space.end left --set space.end background.drawing=off width=6
+  sketchybar --add item space.end left --set space.end background.drawing=off width=0
   sketchybar --add bracket spaces_bracket space.start space.end \
     --set spaces_bracket background.height=26 background.color=0xff1e2030 background.corner_radius=6
 done

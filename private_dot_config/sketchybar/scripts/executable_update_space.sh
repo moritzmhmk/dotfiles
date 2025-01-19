@@ -21,7 +21,7 @@ if [[ "$SENDER" == "forced" ]]; then
     background.height=20
     background.corner_radius=5
     background.drawing=off
-    padding_left=1
+    padding_left=3
     padding_right=1
   )
 
