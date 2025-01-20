@@ -24,41 +24,67 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
-space_bracket=(
-  background.border_color=0xffffffff
-  background.border_width=0
+
+## Spaces ##
+space_item=(
+  icon.highlight_color=0xff1e2030
+  icon.padding_left=3
+  icon.padding_right=3
+  label.highlight_color=0xff1e2030
+  label.font="sketchybar-app-font-bg:Regular:16.0"
+  label.padding_left=0
+  label.padding_right=1
   background.height=20
   background.corner_radius=5
-  background.drawing=on
+  background.drawing=off
+  padding_left=3
+  padding_right=1
+)
+
+spaces_bracket=(
+  background.height=26
+  background.color=0xff1e2030
+  background.corner_radius=6
 )
 
 space_colors=(0xfff0c6c6 0xffc6a0f6 0xfff5a97f 0xff8bd5ca 0xff8aadf4)
 
 sketchybar --add event aerospace_workspace_change
 
-for monitor in $(aerospace list-monitors | awk '{print $1}'); do
-  sketchybar --add item space.start left --set space.start background.drawing=off width=0
-  space_index=0
-  for sid in $(aerospace list-workspaces --monitor $monitor); do
-    space_color=${space_colors[space_index%${#space_colors[@]}]}
-    sketchybar --add item space.$sid left \
-      --subscribe space.$sid space_windows_change aerospace_workspace_change display_change system_woke \
-      --set space.$sid \
-      display=$monitor \
-      click_script="aerospace workspace $sid" \
-      script="$CONFIG_DIR/scripts/update_space.sh $sid $space_color"
+sketchybar --add item space.start left --set space.start background.drawing=off width=0
+space_index=0
+for space_info_str in $(aerospace list-workspaces --all --format "%{monitor-appkit-nsscreen-screens-id}:%{workspace}"); do
+  space_info_arr=(${space_info_str//:/ })
+  space_monitor=${space_info_arr[0]}
+  space_id=${space_info_arr[1]}
+  space_color=${space_colors[space_index%${#space_colors[@]}]}
 
-    ((space_index++))
-  done
-  sketchybar --add item space.end left --set space.end background.drawing=off width=0
-  sketchybar --add bracket spaces_bracket space.start space.end \
-    --set spaces_bracket background.height=26 background.color=0xff1e2030 background.corner_radius=6
+  sketchybar --add item space.$space_id left \
+    --subscribe space.$space_id space_windows_change aerospace_workspace_change display_change system_woke \
+    --set space.$space_id \
+    icon=$space_id \
+    icon.color=$space_color label.color=$space_color background.color=$space_color "${space_item[@]}" \
+    display=$space_monitor \
+    click_script="aerospace workspace $space_id" \
+    script="$CONFIG_DIR/scripts/update_space.sh $space_id"
+
+  ((space_index++))
 done
 
+sketchybar --move space.0 after space.9
+
+sketchybar --add item space.end left \
+           --set space.end background.drawing=off width=0 \
+           --add bracket spaces_bracket space.start space.end \
+           --set spaces_bracket "${spaces_bracket[@]}"
+
+
+## Clock ##
 sketchybar --add item clock right \
            --set clock \
              update_freq=10 \
              script="$CONFIG_DIR/scripts/update_clock.sh"
+
 
 sketchybar --update
 
