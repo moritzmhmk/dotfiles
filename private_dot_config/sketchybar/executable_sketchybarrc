@@ -57,6 +57,7 @@ done
 
 sketchybar --add item clock right \
            --set clock \
+             update_freq=10 \
              script="$CONFIG_DIR/scripts/update_clock.sh"
 
 sketchybar --update
