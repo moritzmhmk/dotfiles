@@ -80,8 +80,15 @@ sketchybar --add item space.end left \
 
 
 ## Clock ##
+clock_item=(
+  background.height=26
+  background.color=0xff1e2030
+  background.corner_radius=6
+  label.padding_right=6
+)
 sketchybar --add item clock right \
            --set clock \
+             "${clock_item[@]}" \
              update_freq=10 \
              script="$CONFIG_DIR/scripts/update_clock.sh"
 
