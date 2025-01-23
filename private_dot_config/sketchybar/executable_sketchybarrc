@@ -92,6 +92,19 @@ sketchybar --add item clock right \
              update_freq=10 \
              script="$CONFIG_DIR/scripts/update_clock.sh"
 
+## Dark Mode toggle ##
+darkmode_item=(
+  icon="􂱣"
+  icon.font="SF Pro:Regular:16"
+  background.height=26
+  background.color=0xff1e2030
+  background.corner_radius=6
+  padding_right=6
+)
+sketchybar --add item darkmode right \
+           --set darkmode \
+             "${darkmode_item[@]}" \
+             click_script="osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to not dark mode'"
 
 sketchybar --update
 
