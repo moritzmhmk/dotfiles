@@ -51,6 +51,7 @@ function __icon_map() {
     com.apple.systempreferences) echo :system_settings_simple: ;; # System Settings.app
     com.apple.weather) echo :default: ;; # Weather.app
     com.bitcavehq.Airflow) echo :default: ;; # Airflow.app
+    com.citrix.receiver.*) echo :citrix_workspace: ;;
     com.daisydiskapp.DaisyDisk) echo :default: ;; # DaisyDisk.app
     com.gingerlabs.Notability) echo :default: ;; # Notability.app
     com.github.GitHubClient) echo :github_desktop: ;; # GitHub Desktop.app
@@ -67,7 +68,7 @@ function __icon_map() {
     com.microsoft.rdc.macos) echo :microsoft_remotedesktop: ;; # Microsoft Remote Desktop.app
     com.mitchellh.ghostty) echo :terminal: ;; # Ghostty.app
     com.moneymoney-app.retail) echo :default: ;; # MoneyMoney.app
-    com.prusa3d.slic3r/) echo :default: ;; # PrusaSlicer.app
+    com.prusa3d.slic3r/) echo :prusa_slicer: ;; # PrusaSlicer.app
     com.readitlater.PocketMac) echo :default: ;; # Pocket.app
     com.reederapp.rkit2.mac) echo :default: ;; # Reeder.app
     com.ridiculousfish.HexFiend) echo :default: ;; # Hex Fiend.app
