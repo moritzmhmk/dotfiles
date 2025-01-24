@@ -24,7 +24,6 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
-
 ## Spaces ##
 space_item=(
   icon.highlight_color=0xff1e2030
@@ -54,19 +53,19 @@ sketchybar --add event aerospace_workspace_change
 sketchybar --add item space.start left --set space.start background.drawing=off width=0
 space_index=0
 for space_info_str in $(aerospace list-workspaces --all --format "%{monitor-appkit-nsscreen-screens-id}:%{workspace}"); do
-  space_info_arr=(${space_info_str//:/ })
+  IFS=":" read -r -a space_info_arr <<<"$space_info_str"
   space_monitor=${space_info_arr[0]}
   space_id=${space_info_arr[1]}
-  space_color=${space_colors[space_index%${#space_colors[@]}]}
+  space_color=${space_colors[space_index % ${#space_colors[@]}]}
 
-  sketchybar --add item space.$space_id left \
-    --subscribe space.$space_id space_windows_change aerospace_workspace_change display_change system_woke \
-    --set space.$space_id \
-    icon=$space_id \
-    icon.color=$space_color label.color=$space_color background.color=$space_color "${space_item[@]}" \
-    display=$space_monitor \
-    click_script="aerospace workspace $space_id" \
-    script="$CONFIG_DIR/scripts/update_space.sh $space_id"
+  sketchybar --add item "space.$space_id" left \
+    --subscribe "space.$space_id" space_windows_change aerospace_workspace_change display_change system_woke \
+    --set "space.$space_id" \
+    icon="$space_id" \
+    icon.color="$space_color" label.color="$space_color" background.color="$space_color" "${space_item[@]}" \
+    display="$space_monitor" \
+    click_script="aerospace workspace \"$space_id\"" \
+    script="\"$CONFIG_DIR/scripts/update_space.sh\" \"$space_id\""
 
   ((space_index++))
 done
@@ -74,10 +73,9 @@ done
 sketchybar --move space.0 after space.9
 
 sketchybar --add item space.end left \
-           --set space.end background.drawing=off width=0 \
-           --add bracket spaces_bracket space.start space.end \
-           --set spaces_bracket "${spaces_bracket[@]}"
-
+  --set space.end background.drawing=off width=0 \
+  --add bracket spaces_bracket space.start space.end \
+  --set spaces_bracket "${spaces_bracket[@]}"
 
 ## Clock ##
 clock_item=(
@@ -87,10 +85,10 @@ clock_item=(
   label.padding_right=6
 )
 sketchybar --add item clock right \
-           --set clock \
-             "${clock_item[@]}" \
-             update_freq=10 \
-             script="$CONFIG_DIR/scripts/update_clock.sh"
+  --set clock \
+  "${clock_item[@]}" \
+  update_freq=10 \
+  script="$CONFIG_DIR/scripts/update_clock.sh"
 
 ## Dark Mode toggle ##
 darkmode_item=(
@@ -102,9 +100,8 @@ darkmode_item=(
   padding_right=6
 )
 sketchybar --add item darkmode right \
-           --set darkmode \
-             "${darkmode_item[@]}" \
-             click_script="osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to not dark mode'"
+  --set darkmode \
+  "${darkmode_item[@]}" \
+  click_script="osascript -e 'tell app \"System Events\" to tell appearance preferences to set dark mode to not dark mode'"
 
 sketchybar --update
-

@@ -1,25 +1,21 @@
 #!/usr/bin/env bash
 
-source $CONFIG_DIR/icon_map.sh
+source "$CONFIG_DIR/icon_map.sh"
 
 if [[ "$SENDER" == "forced" || "$SENDER" == "space_windows_change" ]]; then
-  app_ids=$(aerospace list-windows --workspace $1 --format %{app-bundle-id} | awk '!a[$0]++' -)
-  app_icons=$(for app_id in $app_ids; do
-    echo "$(__icon_map "$app_id")"
-  done)
-
-  sketchybar --set $NAME label="$(echo $app_icons)"
+  app_ids=$(aerospace list-windows --workspace "$1" --format "%{app-bundle-id}" | awk '!a[$0]++' -)
+  app_icons=$(for app_id in $app_ids; do __icon_map "$app_id"; done)
+  sketchybar --set "$NAME" label="$(echo $app_icons)"
 fi
-
 
 if [[ -n "$ACTIVE_WORKSPACE" ]]; then
   if [[ "$1" == "$ACTIVE_WORKSPACE" ]]; then
-    sketchybar --set $NAME \
+    sketchybar --set "$NAME" \
       icon.highlight=on \
       label.highlight=on \
       background.drawing=on
   else
-    sketchybar --set $NAME \
+    sketchybar --set "$NAME" \
       icon.highlight=off \
       label.highlight=off \
       background.drawing=off
@@ -28,11 +24,10 @@ fi
 
 # TODO create event for "move-workspace-to-monitor"
 for space_info_str in $(aerospace list-workspaces --all --format "%{monitor-appkit-nsscreen-screens-id}:%{workspace}"); do
-  space_info_arr=(${space_info_str//:/ })
+  IFS=":" read -r -a space_info_arr <<<"$space_info_str"
   space_monitor=${space_info_arr[0]}
   space_id=${space_info_arr[1]}
   if [[ "$1" == "$space_id" ]]; then
-    sketchybar --set $NAME display=$space_monitor
+    sketchybar --set "$NAME" display="$space_monitor"
   fi
 done
-
