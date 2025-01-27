@@ -1,8 +1,8 @@
 start-at-login = true
 after-login-command = []
-after-startup-command = []
+after-startup-command = ['exec-and-forget sketchybar --reload']
 exec-on-workspace-change = ['/bin/bash', '-c',
-    'sketchybar --trigger aerospace_workspace_change ACTIVE_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+    '/usr/local/bin/sketchybar --trigger aerospace_workspace_change ACTIVE_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 ]
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
