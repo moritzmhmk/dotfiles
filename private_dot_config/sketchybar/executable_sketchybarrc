@@ -48,7 +48,8 @@ spaces_bracket=(
 
 space_colors=(0xfff0c6c6 0xffc6a0f6 0xfff5a97f 0xff8bd5ca 0xff8aadf4)
 
-sketchybar --add event aerospace_workspace_change
+sketchybar --add event aerospace_workspace_change \
+           --add event aerospace_moved_node_to_workspace
 
 sketchybar --add item space.start left --set space.start background.drawing=off width=0
 space_index=0
@@ -59,7 +60,11 @@ for space_info_str in $(aerospace list-workspaces --all --format "%{monitor-appk
   space_color=${space_colors[space_index % ${#space_colors[@]}]}
 
   sketchybar --add item "space.$space_id" left \
-    --subscribe "space.$space_id" space_windows_change aerospace_workspace_change display_change system_woke \
+    --subscribe "space.$space_id" \
+      space_windows_change \
+      aerospace_workspace_change \
+      aerospace_moved_node_to_workspace \
+      display_change \
     --set "space.$space_id" \
     icon="$space_id" \
     icon.color="$space_color" label.color="$space_color" background.color="$space_color" "${space_item[@]}" \

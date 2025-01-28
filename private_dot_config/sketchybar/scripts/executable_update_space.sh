@@ -2,7 +2,13 @@
 
 source "$CONFIG_DIR/icon_map.sh"
 
-if [[ "$SENDER" == "forced" || "$SENDER" == "space_windows_change" ]]; then
+space_highlight=$(sketchybar --query "$NAME" | jq -r ".icon.highlight")
+if [[
+  "$SENDER" == "forced" || 
+  "$SENDER" == "space_windows_change" ||
+  "$SENDER" == "aerospace_moved_node_to_workspace" && "$TARGET_WORKSPACE" == "$1" ||
+  "$SENDER" == "aerospace_moved_node_to_workspace" && "$space_highlight" == "on" # i.e. is active
+]]; then
   app_ids=$(aerospace list-windows --workspace "$1" --format "%{app-bundle-id}" | awk '!a[$0]++' -)
   app_icons=$(for app_id in $app_ids; do __icon_map "$app_id"; done)
   sketchybar --set "$NAME" label="$(echo $app_icons)"
