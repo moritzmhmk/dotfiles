@@ -15,6 +15,8 @@ move < 0x29 ; join # 0x29 = Ö
 join < escape ; default
 join < 0x29 ; focus # 0x29 = Ö
 
+focus < 0x32: aerospace move-workspace-to-monitor --wrap-around next # 0x32 = <
+
 focus < h : aerospace focus left
 focus < j : aerospace focus down
 focus < k : aerospace focus up
