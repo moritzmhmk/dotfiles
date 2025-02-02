@@ -1,5 +1,8 @@
 #!/bin/bash
 
+color_bg=0xff24273a
+color_fg=0xffcdd6f4
+
 bar=(
   position=top
   height=32
@@ -13,23 +16,27 @@ sketchybar --bar "${bar[@]}"
 default=(
   padding_left=0
   padding_right=0
-  icon.font="FiraCode Nerd Font Mono:Regular:12.0"
+  icon.font="SF Pro:Light:16"
   label.font="FiraCode Nerd Font Mono:Regular:12.0"
-  icon.color=0xffffffff
-  label.color=0xffffffff
+  icon.color=$color_fg
+  label.color=$color_fg
   icon.padding_left=3
   icon.padding_right=3
   label.padding_left=0
   label.padding_right=0
+  background.color=$color_bg
+  background.height=26
+  background.corner_radius=6
 )
 sketchybar --default "${default[@]}"
 
 ## Spaces ##
 space_item=(
-  icon.highlight_color=0xff1e2030
-  icon.padding_left=3
+  icon.highlight_color=$color_bg
+  icon.font="FiraCode Nerd Font Mono:Regular:10.0"
+  icon.padding_left=4
   icon.padding_right=3
-  label.highlight_color=0xff1e2030
+  label.highlight_color=$color_bg
   label.font="sketchybar-app-font-bg:Regular:16.0"
   label.padding_left=0
   label.padding_right=1
@@ -38,12 +45,6 @@ space_item=(
   background.drawing=off
   padding_left=3
   padding_right=1
-)
-
-spaces_bracket=(
-  background.height=26
-  background.color=0xff1e2030
-  background.corner_radius=6
 )
 
 space_colors=(0xfff0c6c6 0xffc6a0f6 0xfff5a97f 0xff8bd5ca 0xff8aadf4)
@@ -79,14 +80,10 @@ sketchybar --move space.0 after space.9
 
 sketchybar --add item space.end left \
   --set space.end background.drawing=off width=0 \
-  --add bracket spaces_bracket space.start space.end \
-  --set spaces_bracket "${spaces_bracket[@]}"
+  --add bracket spaces_bracket space.start space.end
 
 ## Clock ##
 clock_item=(
-  background.height=26
-  background.color=0xff1e2030
-  background.corner_radius=6
   label.padding_right=6
 )
 sketchybar --add item clock right \
@@ -95,13 +92,21 @@ sketchybar --add item clock right \
   update_freq=10 \
   script="$CONFIG_DIR/scripts/update_clock.sh"
 
+## Battery ##
+battery_item=(
+  label.padding_left=3
+  label.padding_right=6
+  padding_right=6
+)
+sketchybar --add item battery right \
+  --set battery \
+  "${battery_item[@]}" \
+  update_freq=60 \
+  script="$CONFIG_DIR/scripts/update_battery.sh"
+
 ## Dark Mode toggle ##
 darkmode_item=(
   icon="􂱣"
-  icon.font="SF Pro:Regular:16"
-  background.height=26
-  background.color=0xff1e2030
-  background.corner_radius=6
   padding_right=6
 )
 sketchybar --add item darkmode right \
