@@ -2,6 +2,13 @@
 
 color_bg=0xff24273a
 color_fg=0xffcdd6f4
+color_cyan=0xff8bd5ca # Catppuccin Macchiato Teal
+color_green=0xffa6da95 # Catppuccin Macchiato Green
+color_yellow=0xffeed49f # Catppuccin Macchiato Yellow
+color_orange=0xfff5a97f # Catppuccin Macchiato Peach
+color_red=0xffed8796 # Catppuccin Macchiato Red
+color_purple=0xffc6a0f6 # Catppuccin Macchiato Mauve
+color_blue=0xff8aadf4 # Catppuccin Macchiato Blue
 
 bar=(
   position=top
@@ -47,7 +54,7 @@ space_item=(
   padding_right=1
 )
 
-space_colors=(0xfff0c6c6 0xffc6a0f6 0xfff5a97f 0xff8bd5ca 0xff8aadf4)
+space_colors=($color_cyan, $color_yellow, $color_blue, $color_orange, $color_purple)
 
 sketchybar --add event aerospace_workspace_change \
            --add event aerospace_moved_node_to_workspace
