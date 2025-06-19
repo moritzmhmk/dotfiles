@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Find bundle identifier with: mdls -name kMDItemCFBundleIdentifier -r /Applications/SomeApp.app
+
 function __icon_map() {
   case $1 in
   cc.arduino.*) echo :default: ;;                               # Arduino IDE.app
@@ -90,6 +92,7 @@ function __icon_map() {
   org.audacityteam.audacity) echo :default: ;;                  # Audacity.app
   org.blenderfoundation.blender) echo :blender: ;;              # Blender.app
   org.chromium.Chromium) echo :chrome: ;;                       # Chromium.app
+  org.freecad.FreeCAD) echo :freecad: ;;			# FreeCAD.app
   org.fritzing.Fritzing) echo :default: ;;                      # Fritzing.app
   org.geogebra.calculator.suite) echo :default: ;;              # GeoGebra Calculator Suite.app
   org.geogebra.mac.cas) echo :default: ;;                       # GeoGebra CAS Calculator.app
@@ -104,7 +107,7 @@ function __icon_map() {
   org.via.configurator) echo :default: ;;                       # VIA.app
   org.videolan.vlc) echo :default: ;;                           # VLC.app
   org.whispersystems.signal-desktop) echo :default: ;;          # Signal.app
-  org.zotero.zotero) echo :default: ;;                          # Zotero.app
+  org.zotero.zotero) echo :zotero: ;;                          # Zotero.app
   recipes.mela.appkit) echo :default: ;;                        # Mela.app
   us.zoom.xos) echo :zoom: ;;                                   # zoom.us.app
   *) echo :default: ;;
