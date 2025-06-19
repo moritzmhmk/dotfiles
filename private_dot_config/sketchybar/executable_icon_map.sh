@@ -62,6 +62,7 @@ function __icon_map() {
   com.insomnia.app) echo :default: ;;                           # Insomnia.app
   com.iwaxx.LanScan) echo :default: ;;                          # LanScan.app
   com.junecloud.mac.Deliveries) echo :default: ;;               # Deliveries.app
+  com.linguee.DeepLCopyTranslator) echo :deepl: ;;              # DeepL.app
   com.meshmixer.meshmixer09) echo :default: ;;                  # Meshmixer.app
   com.microsoft.Excel) echo :microsoft_excel: ;;                # Microsoft Excel.app
   com.microsoft.Powerpoint) echo :microsoft_powerpoint: ;;      # Microsoft PowerPoint.app
