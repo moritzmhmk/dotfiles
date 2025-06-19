@@ -111,6 +111,9 @@ function __icon_map() {
   org.zotero.zotero) echo :zotero: ;;                          # Zotero.app
   recipes.mela.appkit) echo :default: ;;                        # Mela.app
   us.zoom.xos) echo :zoom: ;;                                   # zoom.us.app
+  # Web Apps
+  com.apple.Safari.WebApp.2DEFCA3F-5536-4377-8D08-C538631C4EB7) echo :chatgpt: ;;
+  # Default Fallback
   *) echo :default: ;;
   esac
 }
