@@ -1,0 +1,6 @@
+export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+
+export PATH="$PATH:/Users/kanemeier/.local/bin" # `pipx` path
+
+eval "$(starship init zsh)"
+
