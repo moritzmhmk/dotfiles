@@ -107,7 +107,7 @@ function __icon_map() {
   org.raspberrypi.imagingutility) echo :default: ;;             # Raspberry Pi Imager.app
   org.via.configurator) echo :default: ;;                       # VIA.app
   org.videolan.vlc) echo :default: ;;                           # VLC.app
-  org.whispersystems.signal-desktop) echo :default: ;;          # Signal.app
+  org.whispersystems.signal-desktop) echo :signal: ;;          # Signal.app
   org.zotero.zotero) echo :zotero: ;;                          # Zotero.app
   recipes.mela.appkit) echo :default: ;;                        # Mela.app
   us.zoom.xos) echo :zoom: ;;                                   # zoom.us.app
